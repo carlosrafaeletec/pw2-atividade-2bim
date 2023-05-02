@@ -9,6 +9,12 @@ public class UsuarioTeste {
 
         novoUsuario.inativar();
 
+        System.out.println(novoUsuario.autenticar("123"));
+
+        System.out.println(novoUsuario.autenticar("769"));
+
+        System.out.println(novoUsuario.autenticar("433"));
+
         novoUsuario.exibirDados();
 
 

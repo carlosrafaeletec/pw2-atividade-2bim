@@ -74,19 +74,38 @@ public class Usuario {
         this.status = StatusUsuarioEnum.ATIVO;
     }
     void inativar(){
-        LocalDate.now();
+        dataInativacao = LocalDate.now();
         primeiroAcesso = false;
         status = StatusUsuarioEnum.INATIVO;
     }
 
+    public String autenticar(String senha) {
 
-
+        if (tentativasAcesso >= 3){
+            status = StatusUsuarioEnum.BLOQUEADO;
+            return ("Acesso negado");
+        }
+        if (status.equals(StatusUsuarioEnum.INATIVO) || status.equals(StatusUsuarioEnum.BLOQUEADO)) {
+            return ("Acesso negado");
+        }
+        if (senha == "etec#123") {
+            tentativasAcesso = 0;
+            return ("Acesso liberado");
+        }
+        else if (senha != "etec#123"){
+            tentativasAcesso += 1;
+            return ("Usuario/senha inválidos");
+        }
+            return senha;
+    }
     void exibirDados(){
         System.out.println("Codigo: " + codigo);
         System.out.println("Usuario: " + nome);
         System.out.println("Senha: " + senha);
         System.out.println("Trocar senha: " + primeiroAcesso);
         System.out.println("Status: " + status);
+        System.out.println(tentativasAcesso);
+        System.out.println("------------------");
     }
 
 
